@@ -1,0 +1,637 @@
+/* =========================================================
+   Obsidian Publish — Full "Seamless Embeds at All Levels"
+   + Font setup + Colour scheme (#E74099)
+   Best-practice selectors use :where() to keep specificity low.
+   ========================================================= */
+
+/* ==================== IMPORTS ==================== */
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300..900;1,300..900&family=Roboto+Condensed:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+/* ==================== CONSTANTS & CONFIGURATIONS ==================== */
+.published-container {
+  /* Font definitions */
+  --font-text: 'Roboto Condensed', system-ui, -apple-system, 'Segoe UI',
+               Roboto, Helvetica, Arial, 'Noto Sans', 'Apple Color Emoji',
+               'Segoe UI Emoji', sans-serif;
+  --page-title-font: 'Jost', system-ui, -apple-system, 'Segoe UI', Roboto,
+                     Helvetica, Arial, 'Noto Sans', sans-serif;
+  --font-monospace: 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo,
+                     Consolas, 'Liberation Mono', 'Courier New', monospace;
+  
+  /* Color scheme */
+  --accent-color: #E74099;
+  --accent-color-dark: #c03278;
+  --accent-color-light: #C74F8F;
+  --accent-grey: #808080;
+  
+  /* Text colors for footnotes */
+  --text-muted: #666666;
+  --text-faint: #999999;
+}
+
+/* ==================== TYPOGRAPHY ==================== */
+/* Headings use Jost */
+.published-container :is(h1,h2,h3,h4,h5,h6),
+.published-container .inline-title {
+  font-family: 'Jost', system-ui, -apple-system, 'Segoe UI', Roboto,
+               Helvetica, Arial, 'Noto Sans', sans-serif !important;
+  font-feature-settings: "ss01" 1;
+}
+
+/* Page title specific styling */
+.published-container h1 {
+  font-size: 3em !important;
+  color: var(--accent-color) !important;
+}
+
+/* Heading size hierarchy */
+.published-container h2 {
+  font-size: 2.4em !important;
+  color: var(--accent-color) !important;
+}
+
+.published-container h3 {
+  font-size: 1.8em !important;
+  color: var(--accent-color) !important;
+}
+
+.published-container h4 {
+  font-size: 1.5em !important;
+  color: var(--accent-grey) !important;
+}
+
+.published-container h5 {
+  font-size: 1.2em !important;
+  color: var(--accent-grey) !important;
+}
+
+.published-container h6 {
+  font-size: 1.0em !important;
+  color: var(--accent-grey) !important;
+}
+
+/* Code elements use monospace */
+.published-container :is(code, pre, kbd, samp) {
+  font-family: var(--font-monospace) !important;
+}
+
+/* Bold text */
+.published-container :is(b, strong) {
+  color: var(--accent-color) !important;
+  font-weight: 700 !important;
+}
+
+/* Italic text */
+.published-container :is(i, em) {
+  color: var(--accent-color-light) !important;
+  font-style: italic !important;
+}
+
+/* Links */
+.published-container a:where(.internal-link, .external-link) {
+  color: var(--accent-color) !important;
+  text-decoration: none;
+}
+
+.published-container a:where(.internal-link, .external-link):hover,
+.published-container a:where(.internal-link, .external-link):focus {
+  color: var(--accent-color-dark) !important;
+  text-decoration: underline;
+}
+
+/* Inline code */
+.published-container code {
+  color: var(--accent-color-dark) !important;
+}
+
+/* Code blocks with enhanced specificity */
+body .published-container pre,
+body .published-container code,
+body .published-container pre code,
+body .published-container pre[class*="language-"],
+body .published-container code[class*="language-"],
+body .published-container pre[class*="language-"] code[class*="language-"],
+body .published-container .el-pre pre,
+body .published-container .el-pre code {
+  font-family: var(--font-monospace) !important;
+  font-variant-ligatures: none;
+}
+
+/* ==================== EMBED NEUTRALIZER ==================== */
+/* Nuke embed chrome at ANY depth */
+.published-container :is(.markdown-embed, .internal-embed, .file-embed),
+.published-container :is(.markdown-embed, .internal-embed, .file-embed) > .markdown-embed-content {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+
+/* Remove pseudo-elements */
+.published-container :is(.markdown-embed, .internal-embed, .file-embed)::before,
+.published-container :is(.markdown-embed, .internal-embed, .file-embed)::after,
+.published-container .markdown-embed-content::before,
+.published-container .markdown-embed-content::after {
+  content: none !important;
+  display: none !important;
+  border: 0 !important;
+}
+
+/* Hide embed headers */
+.published-container :is(.markdown-embed-title,
+                         .markdown-embed-link,
+                         .file-embed-title,
+                         .file-embed-link) {
+  display: none !important;
+}
+
+/* Suppress inline titles inside embeds */
+.published-container .markdown-embed .inline-title {
+  display: none !important;
+}
+
+/* Merge outer margins */
+.published-container .markdown-embed-content > :first-child { 
+  margin-top: 0 !important; 
+}
+
+.published-container .markdown-embed-content > :last-child { 
+  margin-bottom: 0 !important; 
+}
+
+/* Hide first heading in embeds */
+.published-container .markdown-embed-content > :is(h1,h2,h3,h4,h5,h6):first-child,
+.published-container .markdown-embed-content .markdown-preview-section > :is(h1,h2,h3,h4,h5,h6):first-child {
+  display: none !important;
+}
+
+.published-container .inline-embed .markdown-embed-content > :is(h1,h2,h3,h4,h5,h6):first-child {
+  display: none !important;
+}
+
+/* Flatten wrappers for nested embeds */
+@supports (display: contents) {
+  .published-container :is(.markdown-embed, .internal-embed, .file-embed) {
+    display: contents !important;
+  }
+}
+
+/* Specificity booster for theme compatibility */
+body .published-container .markdown-embed { 
+  border-left: 0 !important; 
+  background: transparent !important; 
+  box-shadow: none !important; 
+}
+
+/* ==================== CALLOUTS ==================== */
+.callout {
+  background-color: transparent !important;
+  border: 1px solid var(--accent-color) !important;
+  border-radius: var(--callout-radius);
+  padding: var(--callout-padding);
+}
+
+.callout .callout-title {
+  color: var(--accent-color) !important;
+}
+
+.callout .callout-icon {
+  color: var(--accent-color) !important;
+  width: 1em;
+  height: 1em;
+  background-color: var(--accent-color);
+  mask: none !important;
+  -webkit-mask: none !important;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.callout .callout-icon svg {
+  display: none !important;
+}
+
+/* ==================== GRAPHS ==================== */
+/* Canvas/WebGL graph */
+.published-container,
+.graph,
+.graph-view,
+.block-language-graph {
+  --graph-line: #E74099;
+  --graph-line-highlight: #E74099;
+  --graph-line-opacity: 1;
+  --graph-line-unresolved: color-mix(in oklab, #E74099 30%, white);
+  --graph-unresolved-opacity: 0.35;
+}
+
+/* Publish graph colors */
+.theme-light .graph-view.color-fill,
+.theme-dark .graph-view.color-fill { 
+  color: #E74099 !important; 
+}
+
+.theme-light .graph-view.color-line,
+.theme-dark .graph-view.color-line { 
+  color: #c03278 !important; 
+}
+
+.theme-light .graph-view.color-text,
+.theme-dark .graph-view.color-text { 
+  color: #C74F8F !important; 
+}
+
+/* SVG graph edges */
+.graph-view svg .link,
+svg.graph .link {
+  stroke: #E74099 !important;
+  stroke-opacity: 1 !important;
+}
+
+/* Graph nodes */
+.graph-view svg .node,
+svg.graph .node {
+  fill: #E74099 !important;
+  stroke: #c03278 !important;
+  stroke-width: 2 !important;
+}
+
+/* Node text labels */
+.graph-view svg .node text,
+svg.graph .node text {
+  fill: white !important;
+  font-weight: bold !important;
+}
+
+/* Hover states for nodes */
+.graph-view svg .node:hover,
+svg.graph .node:hover {
+  fill: #C74F8F !important;
+  stroke: #E74099 !important;
+  stroke-width: 3 !important;
+}
+
+/* Hover states for edges */
+.graph-view svg .link:hover,
+svg.graph .link:hover {
+  stroke: #C74F8F !important;
+  stroke-width: 3 !important;
+}
+
+/* Unresolved links */
+.graph-view svg .link.is-unresolved,
+svg.graph .link.is-unresolved {
+  stroke: color-mix(in oklab, #E74099 30%, white) !important;
+  stroke-opacity: 0.7 !important;
+  stroke-dasharray: 3 3;
+}
+
+/* Edges connected to unresolved nodes */
+.graph-view svg .node.is-unresolved ~ .link,
+svg.graph .node.is-unresolved ~ .link {
+  stroke: color-mix(in oklab, #E74099 30%, white) !important;
+  stroke-opacity: 0.7 !important;
+  stroke-dasharray: 3 3;
+}
+
+/* Unresolved nodes */
+.graph-view svg .node.is-unresolved,
+svg.graph .node.is-unresolved {
+  fill: color-mix(in oklab, #E74099 20%, white) !important;
+  stroke: color-mix(in oklab, #E74099 40%, white) !important;
+  stroke-dasharray: 2 2;
+}
+
+/* Graph controls and UI elements */
+.graph-controls,
+.graph-controls button,
+.graph-controls select {
+  color: #E74099 !important;
+  border-color: #E74099 !important;
+}
+
+.graph-controls button:hover,
+.graph-controls button:focus {
+  background-color: #E74099 !important;
+  color: white !important;
+}
+
+/* ==================== IMAGES & FIGURES ==================== */
+/* Center images with alt text containing "center" or "centre" */
+img[alt*="center"], 
+img[alt*="centre"] {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Figure captions */
+.markdown-preview-view {
+  counter-reset: figure;
+}
+
+.caption::before {
+  counter-increment: figure;
+  content: "Figure " counter(figure) ". ";
+  font-weight: bold;
+}
+
+.caption {
+  display: block;
+  font-size: 0.85em;
+  font-style: italic;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.caption-center { text-align: center; }
+.caption-left { text-align: left; }
+.caption-right { text-align: right; }
+
+/* ==================== FOOTNOTES ==================== */
+/* Standard footnote reference styling */
+.published-container .footnote-ref,
+.published-container a.footnote-ref,
+.published-container sup a,
+.published-container a[href^="#fn"],
+.published-container a[data-footnote-id] {
+  vertical-align: super !important;
+  line-height: 0 !important;
+  color: var(--accent-color) !important;
+  text-decoration: none !important;
+  font-weight: normal !important;
+}
+
+.published-container .footnote-ref:hover,
+.published-container a.footnote-ref:hover,
+.published-container sup a:hover,
+.published-container a[href^="#fn"]:hover,
+.published-container a[data-footnote-id]:hover {
+  color: var(--accent-color-dark) !important;
+  text-decoration: underline !important;
+}
+
+/* Footnote container styling - let it use default size */
+.published-container .footnotes {
+  color: var(--text-muted) !important;
+  margin-top: 2em !important;
+  padding-top: 1em !important;
+  border-top: 1px solid var(--accent-color-light) !important;
+}
+
+/* Individual footnote items - let them use default size */
+.published-container .footnotes ol {
+  margin: 0 !important;
+  padding-left: 1.5em !important;
+}
+
+.published-container .footnotes li {
+  margin: 0.5em 0 !important;
+}
+
+/* CRITICAL: Make embedded content in footnotes inherit the footnote's natural size and colors */
+.published-container .footnotes .markdown-embed,
+.published-container .footnotes .internal-embed,
+.published-container .footnotes .file-embed {
+  font-size: inherit !important;
+  line-height: inherit !important;
+  color: inherit !important;
+}
+
+/* Embedded content within footnotes should inherit footnote styling */
+.published-container .footnotes .markdown-embed-content,
+.published-container .footnotes .internal-embed .markdown-embed-content,
+.published-container .footnotes .file-embed .markdown-embed-content {
+  font-size: inherit !important;
+  line-height: inherit !important;
+  color: inherit !important;
+}
+
+/* Ensure all text elements within footnote embeds inherit footnote size and colors */
+.published-container .footnotes .markdown-embed-content :is(p, div, span, li, td, th),
+.published-container .footnotes .internal-embed .markdown-embed-content :is(p, div, span, li, td, th),
+.published-container .footnotes .file-embed .markdown-embed-content :is(p, div, span, li, td, th) {
+  font-size: inherit !important;
+  line-height: inherit !important;
+  color: inherit !important;
+}
+
+/* Headings within footnote embeds should inherit footnote size and colors */
+.published-container .footnotes .markdown-embed-content :is(h1, h2, h3, h4, h5, h6),
+.published-container .footnotes .internal-embed .markdown-embed-content :is(h1, h2, h3, h4, h5, h6),
+.published-container .footnotes .file-embed .markdown-embed-content :is(h1, h2, h3, h4, h5, h6) {
+  font-size: inherit !important;
+  color: inherit !important;
+  margin-top: 0.3em !important;
+  margin-bottom: 0.2em !important;
+}
+
+/* Code within footnote embeds should inherit footnote size and colors */
+.published-container .footnotes .markdown-embed-content :is(code, pre),
+.published-container .footnotes .internal-embed .markdown-embed-content :is(code, pre),
+.published-container .footnotes .file-embed .markdown-embed-content :is(code, pre) {
+  font-size: inherit !important;
+  color: inherit !important;
+}
+
+/* Lists within footnote embeds should inherit footnote size and colors */
+.published-container .footnotes .markdown-embed-content :is(ul, ol),
+.published-container .footnotes .internal-embed .markdown-embed-content :is(ul, ol),
+.published-container .footnotes .file-embed .markdown-embed-content :is(ul, ol) {
+  font-size: inherit !important;
+  color: inherit !important;
+  margin: 0.2em 0 !important;
+  padding-left: 1.2em !important;
+}
+
+/* Tables within footnote embeds should inherit footnote size and colors */
+.published-container .footnotes .markdown-embed-content table,
+.published-container .footnotes .internal-embed .markdown-embed-content table,
+.published-container .footnotes .file-embed .markdown-embed-content table {
+  font-size: inherit !important;
+  color: inherit !important;
+  margin: 0.3em 0 !important;
+}
+
+/* Table cells within footnote embeds should inherit footnote colors */
+.published-container .footnotes .markdown-embed-content :is(td, th),
+.published-container .footnotes .internal-embed .markdown-embed-content :is(td, th),
+.published-container .footnotes .file-embed .markdown-embed-content :is(td, th) {
+  color: inherit !important;
+}
+
+/* Blockquotes within footnote embeds should inherit footnote size and colors */
+.published-container .footnotes .markdown-embed-content blockquote,
+.published-container .footnotes .internal-embed .markdown-embed-content blockquote,
+.published-container .footnotes .file-embed .markdown-embed-content blockquote {
+  font-size: inherit !important;
+  color: inherit !important;
+  margin: 0.3em 0 !important;
+  padding: 0.2em 0.5em !important;
+}
+
+/* Links within footnote embeds should use muted footnote color */
+.published-container .footnotes .markdown-embed-content a,
+.published-container .footnotes .internal-embed .markdown-embed-content a,
+.published-container .footnotes .file-embed .markdown-embed-content a {
+  color: var(--text-muted) !important;
+}
+
+/* Bold and italic text within footnote embeds should use muted colors */
+.published-container .footnotes .markdown-embed-content :is(b, strong),
+.published-container .footnotes .internal-embed .markdown-embed-content :is(b, strong),
+.published-container .footnotes .file-embed .markdown-embed-content :is(b, strong) {
+  color: var(--text-muted) !important;
+}
+
+.published-container .footnotes .markdown-embed-content :is(i, em),
+.published-container .footnotes .internal-embed .markdown-embed-content :is(i, em),
+.published-container .footnotes .file-embed .markdown-embed-content :is(i, em) {
+  color: var(--text-muted) !important;
+}
+
+/* Additional specificity for inline footnotes (when they appear inline) */
+.published-container .footnote-ref + .footnote-content,
+.published-container .footnote-content {
+  color: var(--text-muted) !important;
+  margin-top: 0.5em !important;
+  padding-left: 1em !important;
+  border-left: 2px solid var(--accent-color-light) !important;
+}
+
+/* Ensure embedded content in inline footnotes also inherits footnote size and colors */
+.published-container .footnote-content .markdown-embed,
+.published-container .footnote-content .internal-embed,
+.published-container .footnote-content .file-embed,
+.published-container .footnote-content .markdown-embed-content,
+.published-container .footnote-content .internal-embed .markdown-embed-content,
+.published-container .footnote-content .file-embed .markdown-embed-content {
+  font-size: inherit !important;
+  line-height: inherit !important;
+  color: inherit !important;
+}
+
+/* All text elements in inline footnote embeds should inherit footnote colors */
+.published-container .footnote-content .markdown-embed-content :is(p, div, span, li, td, th, h1, h2, h3, h4, h5, h6, code, pre, ul, ol, blockquote),
+.published-container .footnote-content .internal-embed .markdown-embed-content :is(p, div, span, li, td, th, h1, h2, h3, h4, h5, h6, code, pre, ul, ol, blockquote),
+.published-container .footnote-content .file-embed .markdown-embed-content :is(p, div, span, li, td, th, h1, h2, h3, h4, h5, h6, code, pre, ul, ol, blockquote) {
+  color: inherit !important;
+}
+
+/* Links in inline footnote embeds should use muted color */
+.published-container .footnote-content .markdown-embed-content a,
+.published-container .footnote-content .internal-embed .markdown-embed-content a,
+.published-container .footnote-content .file-embed .markdown-embed-content a {
+  color: var(--text-muted) !important;
+}
+
+/* Bold and italic in inline footnote embeds should use muted color */
+.published-container .footnote-content .markdown-embed-content :is(b, strong, i, em),
+.published-container .footnote-content .internal-embed .markdown-embed-content :is(b, strong, i, em),
+.published-container .footnote-content .file-embed .markdown-embed-content :is(b, strong, i, em) {
+  color: var(--text-muted) !important;
+}
+
+/* ==================== PAGE NAVIGATION & POPOVERS ==================== */
+/* Table of contents / outline navigation - default grey color */
+body .outline .tree-item-self,
+body .outline .tree-item a,
+body .outline .tree-item-inner,
+body .mod-sidedock .outline .tree-item-self,
+body .site-body-right-column .outline .tree-item-self,
+body .site-body-right-column .tree-item a,
+body .site-body-right-column .tree-item-inner,
+body .toc-item,
+body .toc-item a,
+body .table-of-contents a,
+body .table-of-contents .tree-item-self {
+  color: var(--accent-grey) !important;
+}
+
+body .outline .tree-item-self:hover,
+body .outline .tree-item a:hover,
+body .toc-item:hover,
+body .toc-item a:hover,
+body .table-of-contents a:hover {
+  color: var(--accent-color) !important;
+}
+
+/* Active/selected state for outline items - accent color only for active */
+body .outline .tree-item-self.is-active,
+body .outline .tree-item.is-active .tree-item-self,
+body .outline .tree-item.is-active .tree-item-inner,
+body .outline .tree-item a.is-active,
+body .site-body-right-column .outline .tree-item-self.is-active,
+body .site-body-right-column .tree-item.is-active .tree-item-self,
+body .site-body-right-column .tree-item.is-active .tree-item-inner,
+body .toc-item.is-active,
+body .toc-item a.is-active,
+body .table-of-contents .is-active,
+body .table-of-contents a.is-active {
+  color: var(--accent-color) !important;
+  font-weight: bold !important;
+}
+
+/* Popover links - more specific selectors for tooltip/popup content */
+.published-container .popover a,
+.published-container .popover .external-link,
+.published-container .popover .internal-link,
+.published-container .hover-popover a,
+.published-container .hover-popover .external-link,
+.published-container .hover-popover .internal-link,
+.published-container .popover .markdown-embed-content a,
+.published-container .hover-popover .markdown-embed-content a,
+.published-container .tooltip a,
+.published-container .tooltip-content a,
+.published-container .suggestion-item a,
+.published-container .suggestion-item .external-link {
+  color: var(--accent-color) !important;
+  text-decoration: none !important;
+}
+
+.published-container .popover a:hover,
+.published-container .popover .external-link:hover,
+.published-container .popover .internal-link:hover,
+.published-container .hover-popover a:hover,
+.published-container .hover-popover .external-link:hover,
+.published-container .hover-popover .internal-link:hover,
+.published-container .popover .markdown-embed-content a:hover,
+.published-container .hover-popover .markdown-embed-content a:hover,
+.published-container .tooltip a:hover,
+.published-container .tooltip-content a:hover,
+.published-container .suggestion-item a:hover,
+.published-container .suggestion-item .external-link:hover {
+  color: var(--accent-color-dark) !important;
+  text-decoration: underline !important;
+}
+
+/* ==================== BROWSER DEFAULT OVERRIDES ==================== */
+/* Override any browser default purple/blue link colors */
+body a[href^="#"],
+body sup a,
+body a.footnote-ref,
+body .published-container a[href^="#"] {
+  color: var(--accent-color) !important;
+  font-weight: 400 !important;
+}
+
+/* Ensure superscript links aren't bold */
+body sup,
+body sup a,
+body .published-container sup,
+body .published-container sup a {
+  font-weight: 400 !important;
+}
+
+/* ==================== UTILITIES ==================== */
+/* Hide Publish footer */
+.published-container .footer-display { 
+  display: none !important; 
+}
+
+/* Optional: disable image captions from filenames */
+/* .published-container .image-embed .image-caption { display: none !important; } */
+
+
